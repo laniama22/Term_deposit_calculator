@@ -7,7 +7,7 @@ function calculateTermDeposit(event: React.FormEvent<HTMLFormElement>) {
   const amount = parseFloat((form.elements.namedItem("amount") as HTMLInputElement).value);
   console.log({ bank, amount });
     
-  // Calculation logic goes here
+  // Calculation logic
     const selectedBank = banks.find(b => b.name === bank);
     if (selectedBank) {
       const interest = Math.round(selectedBank.interestRate / 100 * amount);
