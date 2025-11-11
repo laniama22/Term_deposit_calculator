@@ -5,14 +5,15 @@ import { useState } from 'react'
 function App() {
   const [result, setResult] = useState<{ total: number; taxAmount: number; interest: number; amount: number; bank: string }>();
 
+  const numformat = new Intl.NumberFormat("cz-CZ", {style: "currency", currency: "CZK"})
+
   return (
     <>
       <h1>Term Deposit Calculator</h1>
       <div className='card'>
-        <form onSubmit={(event) => {
+        <form onChange={(event) => {
           const calculatedResult = calculateTermDeposit(event);
           setResult(calculatedResult);
-          console.log(calculatedResult);
         }}>
           <label>
             Select bank:
@@ -33,7 +34,6 @@ function App() {
             <input type="number" name="amount" id="amount" />
           </label>
           <br />
-          <input type="submit" value="Calculate" />
         </form>
       </div>
       <div className='card'>
@@ -48,10 +48,10 @@ function App() {
             listStyle: 'none',
           }}>
             <li>Bank: {result.bank}</li>
-            <li>Tax Amount: {result.taxAmount}</li>
-            <li>Amount: {result.amount}</li>
-            <li>Interest: {result.interest}</li>
-            <li>Total: {result.total}</li>
+            <li>Amount: {numformat.format(result.amount)}</li>
+            <li>Interest: {numformat.format(result.interest)}</li>
+            <li>Tax Amount: {numformat.format(result.taxAmount)}</li>
+            <li>Total: {numformat.format(result.total)}</li>
           </ul>
         )}
       </div>
